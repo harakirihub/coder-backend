@@ -68,3 +68,5 @@ producto.save({title:'Royal Canin', price: '400', url:'https://cdn.royalcanin-we
 // producto.getAll()
 // producto.deleteAll()
 // producto.deleteById(2)
+
+module.exports = { Contenedor }
