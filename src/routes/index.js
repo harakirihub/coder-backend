@@ -2,8 +2,8 @@ const { Router }= require('express')
 const router = Router()
 const fs = require ('fs')
 const dataValidation = require('../middlewares/index.js')
-const { getAll, ranProd, Contenedor } = require ('../files/contenedor.js')
-
+const Contenedor = require('../files/contenedor.js')
+const contenedor = new Contenedor('./productos.txt')
 const productsArray = []
 
 let readProductFile = async() =>{
@@ -13,11 +13,9 @@ let readProductFile = async() =>{
         productsArray =JSON.parse(productsFile)
     }
     catch(error){
-
+    console.log(error)
     }
 }
-
-
 
 router.get('/',(req,res)=>{
     res.sendFile(process.cwd() +'/files/index.html')
@@ -26,23 +24,30 @@ router.get('/',(req,res)=>{
 router.post('/', async (req, res) => {
     const { body } = req
     try{
-        await readProductFile()
-        let id = productsArray.length !== 0
-        ? productsArray[productsArray.length -1 ].id +1
-        : 1
-        productsArray.push({...body, id })
-        await fs.promises.writeFile('products.txt',JSON.stringify(productsArray))
-        res.status(200).json({mensaje:'Producto agregado con exito',products:productosArray})
+        const product = await contenedor.save(body)
+        res.json(product)
     }catch (error){
         res.status(400).json(error)
     }
-
 })
 
+router.get('/api/productos', async (req, res)=>{
+    try{
+        const prods = await contenedor.getAll()
+        res.json(prods)
+    }catch(error){
+        res.status(400).json(error)
+    }
+})
 
-router.get('/api/productos', getAll)
-
-router.get('/api/productosRandom', ranProd)
+router.get('/api/productosRandom', async (req, res)=>{
+    try{
+        const rdmProd = await contenedor.ranProd()
+        res.json(rdmProd)
+    }catch(error){
+        res.status(400).json(error)
+    }
+})
 
 
 
