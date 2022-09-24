@@ -25,8 +25,8 @@ getById = async (id) => {
     try{
     const prods = await this.getAll()
     const prodId = prods.find(product => {
-        return product.id === id})
-        if(prodId){ return (prodId) 
+        return product.id == id})
+        if(prodId){  
         return prodId
     }else{
         return null
@@ -42,7 +42,7 @@ getAll = async() => {
     const prods = await fs.promises.readFile(this.file)
     return JSON.parse(prods)
     } catch(error) {
-    console.log(error)
+        return []
 }
 
 }
@@ -74,6 +74,10 @@ ranProd = async() => {
     }
 }
 
+
+
 }
 
+
 module.exports =  Contenedor 
+

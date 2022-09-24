@@ -49,6 +49,48 @@ router.get('/api/productosRandom', async (req, res)=>{
     }
 })
 
+router.get('/api/productos/:id', async (req, res)=>{
+    const  { id }  = req.params
+    try{
+        const prodById = await contenedor.getById(id)
+        res.json(prodById)
 
+        console.log(contenedor.getById(2))
+
+    }catch(error){
+        res.status(400).json(error)
+    }
+})
+
+router.post('/api/productos', async (req, res)=>{
+    const { body } = req
+    try{
+        const product = await contenedor.save(body)
+        res.json(product)
+    }catch (error){
+        res.status(400).json(error)
+    }
+})
+
+router.put('/api/productos/:id', async (req, res)=>{
+    const  { id }  = req.params
+    const { body } = req
+    try{
+        const putIt = await contenedor.save(body)
+        res.json(putIt)
+    }catch(error){
+        res.status(400).json(error)
+    }
+})
+
+router.delete('/api/productos/:id', async (req, res)=>{
+    const  { id }  = req.params
+    try{
+        const dBID = await contenedor.deleteById(id)
+        res.json(dBID)
+    }catch(error){
+        res.status(400).json(error)
+    }
+})
 
 module.exports = router
