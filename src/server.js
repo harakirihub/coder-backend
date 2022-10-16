@@ -1,11 +1,8 @@
 const express = require('express')
-
 const Contenedor = require('./files/contenedor')
 const contenedor = new Contenedor('./productos.txt')
- productos = []
-
+productos = []
 const generalRoutes = require ('./routes/index.js')
-
 const app = express() 
 
 app.set('views', __dirname + '/views')
@@ -15,8 +12,6 @@ app.use(express.static("public"))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use('/',generalRoutes)
-
-
 
 const PORT = process.env.PORT  || 8080 
 
