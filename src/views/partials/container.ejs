@@ -1,0 +1,18 @@
+
+
+
+<div class="row " style="--bs-blue: #0d6efd"  >
+<% prods.forEach(prod=>{ %>
+
+<div class="card" style="width: 18rem;">
+    <img src= <%= prod.url %> class="card-img-top" alt="...">
+    <div class="card-body">
+      <p class="card-text">Nombre: <%= prod.nombre %></p>
+      <p class="card-text">Precio: $ <%= prod.precio %></p>
+      <p class="card-text">Cantidad: <%= prod.stock %></p>
+    
+    </div>
+  </div>
+  <% }) %>
+
+</div>

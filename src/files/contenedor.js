@@ -50,7 +50,7 @@ getAll = async() => {
 deleteById = async (id) => {
     const prods = await this.getAll()
     const delProdId = await prods.filter(product => {
-        return product.id !== id
+        return product.id != id
     })
     if(delProdId){            
         fs.promises.writeFile
@@ -73,8 +73,6 @@ ranProd = async() => {
     console.log(error)
     }
 }
-
-
 
 }
 

@@ -5,6 +5,7 @@ const dataValidation = require('../middlewares/index.js')
 const Contenedor = require('../files/contenedor.js')
 const contenedor = new Contenedor('./productos.txt')
 const productsArray = []
+const productos = []
 
 let readProductFile = async() =>{
     try{ 
@@ -18,18 +19,26 @@ let readProductFile = async() =>{
 }
 
 router.get('/',(req,res)=>{
-    res.sendFile(process.cwd() +'/files/index.html')
+    res.render('layouts/layoutejs',{productos})
+
 })
 
-router.post('/', async (req, res) => {
-    const { body } = req
+router.get('/productos', async (req, res)=>{
     try{
-        const product = await contenedor.save(body)
-        res.json(product)
-    }catch (error){
+        const prods = await contenedor.getAll()
+        res.render('layouts/layoutContainer.ejs',{prods})
+    }  catch(error){
         res.status(400).json(error)
     }
 })
+
+router.post('/productos', async (req, res) => {
+    const { body } = req
+    productos.push(body)
+    contenedor.save(body)
+    res.redirect('/')
+    
+}) 
 
 router.get('/api/productos', async (req, res)=>{
     try{
@@ -92,5 +101,6 @@ router.delete('/api/productos/:id', async (req, res)=>{
         res.status(400).json(error)
     }
 })
+
 
 module.exports = router

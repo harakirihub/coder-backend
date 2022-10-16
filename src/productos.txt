@@ -1,1 +1,1 @@
-[{"id":5}]
+[{"nombre":"Control","precio":"20000","stock":"50","url":"https://media.direct.playstation.com/is/image/sierialto/dualshock-ps4-controller-red-accessory-front","id":1},{"nombre":"Cable USB-C","precio":"500","stock":"20","url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-cD9xwLEic4W47KbsOUiBojWjRT1UiROJJlFS-RwvWi6Dfkq54p-u4Q3mzZcnqtbAD5w&usqp=CAU","id":2}]
