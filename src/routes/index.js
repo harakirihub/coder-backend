@@ -18,15 +18,15 @@ let readProductFile = async() =>{
     }
 }
 
-router.get('/',(req,res)=>{
+/* router.get('/',(req,res)=>{
     res.render('layouts/layoutejs',{productos})
 
 })
-
-router.get('/productos', async (req, res)=>{
+ */
+router.get('/', async (req, res)=>{
     try{
         const prods = await contenedor.getAll()
-        res.render('layouts/layoutContainer.ejs',{prods})
+        res.render('layouts/layoutejs.ejs',{prods, productos})
     }  catch(error){
         res.status(400).json(error)
     }
@@ -36,7 +36,7 @@ router.post('/productos', async (req, res) => {
     const { body } = req
     productos.push(body)
     contenedor.save(body)
-    res.redirect('/')
+    //res.redirect('/')
     
 }) 
 
@@ -102,5 +102,9 @@ router.delete('/api/productos/:id', async (req, res)=>{
     }
 })
 
+/* router.get('/chat',(req,res)=>{
+    res.sendFile('index.html', { root:  __dirname + '\\..\\public\\' })
+})
+ */
 
 module.exports = router
