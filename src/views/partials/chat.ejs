@@ -6,5 +6,13 @@
 </form>
 
 <div>
-<ul class="list-group" id="lista"></ul>
+<ul class="list-group" id="lista">
+    <% listaChat.map(chat=>{ %>
+        <li class="list-group-item">
+            <b style="color:blue"><%= chat.nombre %></b> 
+            <p style="color:brown"><%= chat.time %>
+            </p><%= chat.info %></li>
+            <br> 
+<% })%>
+</ul>
 </div>

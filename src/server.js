@@ -8,6 +8,7 @@ const chatHist = new Contenedor('./historial.txt')
 
 productos = []
 const generalRoutes = require ('./routes/index.js')
+const { string } = require('joi')
 
 const app = express() 
 const httpServer = http.createServer(app)

@@ -3,7 +3,9 @@ const router = Router()
 const fs = require ('fs')
 const dataValidation = require('../middlewares/index.js')
 const Contenedor = require('../files/contenedor.js')
+const { stringify } = require('querystring')
 const contenedor = new Contenedor('./productos.txt')
+const chtHst= new Contenedor('./historial.txt')
 const productsArray = []
 const productos = []
 
@@ -18,15 +20,12 @@ let readProductFile = async() =>{
     }
 }
 
-/* router.get('/',(req,res)=>{
-    res.render('layouts/layoutejs',{productos})
 
-})
- */
 router.get('/', async (req, res)=>{
     try{
         const prods = await contenedor.getAll()
-        res.render('layouts/layoutejs.ejs',{prods, productos})
+        const listaChat = await chtHst.getAll()
+        res.render('layouts/layoutejs.ejs',{prods, productos, listaChat})
     }  catch(error){
         res.status(400).json(error)
     }
@@ -101,10 +100,5 @@ router.delete('/api/productos/:id', async (req, res)=>{
         res.status(400).json(error)
     }
 })
-
-/* router.get('/chat',(req,res)=>{
-    res.sendFile('index.html', { root:  __dirname + '\\..\\public\\' })
-})
- */
 
 module.exports = router
